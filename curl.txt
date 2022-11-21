@@ -1,0 +1,6 @@
+correct links:
+https://api-v2.soundcloud.com/users/104009121/tracks?representation=&client_id=8m4K5d2x4mNmUHLhLmsGq9vxE3dDkxCm&limit=20&offset=0&linked_partitioning=1&app_version=1668781563&app_locale=en
+
+what its doin:
+https://api-v2.soundcloud.com/users/285572916/tracks?offset=2020-11-30T22%3A11%3A48.000Z%2Ctracks%2C00938947714&limit=20
+https://api-v2.soundcloud.com/users/285572916/tracks?offset=2020-11-30T22%3A11%3A48.000Z%2Ctracks%2C00938947714&limit=20&representation=
