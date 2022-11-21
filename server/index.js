@@ -91,11 +91,11 @@ app.get('/tracks', async (req, res) => {
 
     for (let index = 0; index < firstCollection.length; index++) {
         const plays = firstPage.collection[index].playback_count
-        const track_title = firstPage.collection[0].title
-        const genre = firstPage.collection[0].genre
-        const comments = firstPage.collection[0].comment_count
-        const artwork = firstPage.collection[0].artwork_url
-        const artist_name = firstPage.collection[0].user.username
+        const track_title = firstPage.collection[index].title
+        const genre = firstPage.collection[index].genre
+        const comments = firstPage.collection[index].comment_count
+        const artwork = firstPage.collection[index].artwork_url
+        const artist_name = firstPage.collection[index].user.username
 
         tracks.push({
             title: track_title,
