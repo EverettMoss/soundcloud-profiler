@@ -45,12 +45,17 @@ app.get('/likes', async (req, res) => {
     console.log(response.data)
 })
 
-app.get('/tracks', (req, res) => {
+app.get('/tracks', async (req, res) => {
+    tracks = []
+
     //get id
+    const id = await getID('everettbeats')
 
+    //create url
+    const url = `https://api-v2.soundcloud.com/users/${id}/tracks`
 
-
-    const response = axios.get('https://api-v2.soundcloud.com/users/285572916/tracks', {
+    //get tracks json
+    const response = await axios.get(url, {
         params: {
             'representation': '',
             'client_id': '8m4K5d2x4mNmUHLhLmsGq9vxE3dDkxCm',
@@ -75,9 +80,52 @@ app.get('/tracks', (req, res) => {
             'sec-ch-ua-platform': '"macOS"'
         }
     });
-    console.log(response.data.collection[0].track)
-})
 
+    // store data from 1st page
+    const firstPage = response.data
+    var nextURL = firstPage.next_href
+
+    //console.log(firstPage.collection[0].playback_count)
+
+    const firstCollection = firstPage.collection
+
+    for (let index = 0; index < firstCollection.length; index++) {
+        const plays = firstPage.collection[index].playback_count
+        const track_title = firstPage.collection[0].title
+        const genre = firstPage.collection[0].genre
+        const comments = firstPage.collection[0].comment_count
+        const artwork = firstPage.collection[0].artwork_url
+        const artist_name = firstPage.collection[0].user.username
+
+        tracks.push({
+            title: track_title,
+            artist: artist_name,
+            plays: plays,
+            comments: comments,
+            genre: genre,
+            artwork, artwork   
+        })
+        
+    }
+
+    console.log(tracks)
+    
+
+
+/* 
+tracks.push({
+            title: track_title,
+            artist: artist_name,
+            plays: plays,
+            comments: comments,
+            genre: genre,
+            artwork, artwork   
+        })
+*/
+
+
+    
+})
 
 const getID = async (accountName) => {
     var id;
@@ -97,14 +145,6 @@ const getID = async (accountName) => {
     })
     return id;
 }
-
-
-app.get('/getID', async (req, res) => {
-    const d = await getID('everettbeats')
-    console.log(d)
-    //104009121
-
-})
 
 app.listen(PORT, () => {
     console.log(`node running on ${PORT}`)
