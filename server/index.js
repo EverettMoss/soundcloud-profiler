@@ -75,9 +75,7 @@ app.get('/tracks/:id', async (req, res) => {
     tracks = []
 
     //get id
-    const id = await getID('everettbeats')
-    const p = req.params.id
-    console.log("sent straight from frontend: " + p)
+    const id = await getID(req.params.id)
 
     //create url
     var baseURL = 'https://api-v2.soundcloud.com/users/'
@@ -130,7 +128,8 @@ app.get('/tracks/:id', async (req, res) => {
         }
 
     }
-    return tracks
+    res.json(tracks)
+    console.log(tracks)
 })
 
 const getID = async (accountName) => {
