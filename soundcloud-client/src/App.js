@@ -7,13 +7,19 @@ function App() {
   const [tracks, setTracks] = useState([])
 
   const getTracks = async () => {
-    console.log("start")
     const response = await axios.get(`http://localhost:8000/tracks/${accountName}`)
     const data = response.data
     console.log(data)
     setTracks(data)
-    console.log("end")
   }
+
+  /*
+  const sortEm = () => {
+    const r = tracks.sort(({ plays: a }, { plays: b }) => b - a);
+    console.log(r);
+  };
+  */
+
 
   const updateAccountName = (e) => {
     setAccountName(e.target.value)
@@ -25,19 +31,21 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <>
+      <div className='grid h-screen place-items-center'>
+        <div>
+          <p>Account Name:</p>
+          <form onSubmit={handleSubmit}>
+            <input type="text" id="accountName" onChange={(e) => updateAccountName(e)} className='md:w-3/5 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' />
+            <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" onSubmit={handleSubmit}>
+              send it
+            </button>
+          </form>
+          {accountName}
+        </div>
+      </div>
+    </>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          Account Name:
-          <input type="text" id="accountName" onChange={(e) => updateAccountName(e)} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-
-      {accountName}
-
-    </div>
   );
 }
 
