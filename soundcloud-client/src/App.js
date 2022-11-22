@@ -3,26 +3,24 @@ import './App.css';
 import axios from 'axios'
 
 function App() {
-  const [name, setName] = useState(null)
   const [accountName, setAccountName] = useState(null)
   const [tracks, setTracks] = useState([])
 
   const getTracks = async () => {
     console.log("start")
     const response = await axios.get(`http://localhost:8000/tracks/${accountName}`)
-    console.log(response)
-    setTracks(response.data)
-    console.log(tracks)
+    const data = response.data
+    console.log(data)
+    setTracks(data)
     console.log("end")
   }
 
-  const updateName = (e) => {
-    setName(e.target.value)
+  const updateAccountName = (e) => {
+    setAccountName(e.target.value)
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setAccountName(name)
+    e.preventDefault()
     getTracks()
   };
 
@@ -32,14 +30,12 @@ function App() {
       <form onSubmit={handleSubmit}>
         <label>
           Account Name:
-          <input type="text" id="accountName" onChange={(e) => updateName(e)} />
+          <input type="text" id="accountName" onChange={(e) => updateAccountName(e)} />
         </label>
         <input type="submit" value="Submit" />
       </form>
 
       {accountName}
-      {console.log(tracks)}
-
 
     </div>
   );

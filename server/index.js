@@ -70,13 +70,12 @@ app.get('/likes', async (req, res) => {
     console.log(response.data)
 })
 
-app.get('/tracks/:id', async (req, res) => {
+app.get('/tracks/:accountName', async (req, res) => {
     //where all track data is stored
     tracks = []
 
     //get id
-    const id = await getID(req.params.id)
-    console.log("id is: "+id)
+    const id = await getID(req.params.accountName)
 
     //create url
     var baseURL = 'https://api-v2.soundcloud.com/users/'
@@ -102,6 +101,7 @@ app.get('/tracks/:id', async (req, res) => {
             const comments = currentPage[index].comment_count
             const artwork = currentPage[index].artwork_url
             const artist_name = currentPage[index].user.username
+            const song_link = currentPage[index].permalink_url
 
             //add track data to array
             tracks.push({
@@ -110,7 +110,8 @@ app.get('/tracks/:id', async (req, res) => {
                 plays: plays,
                 comments: comments,
                 genre: genre,
-                artwork, artwork
+                artwork: artwork,
+                link: song_link
             })
         }
 
