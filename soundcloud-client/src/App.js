@@ -9,14 +9,11 @@ function App() {
 
   const getTracks = async () => {
     console.log("start")
-
-    
     const response = await axios.get(`http://localhost:8000/tracks/${accountName}`)
+    console.log(response)
     setTracks(response.data)
     console.log(tracks)
-    console.log()
-    
-
+    console.log("end")
   }
 
   const updateName = (e) => {
@@ -26,19 +23,8 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setAccountName(name)
-    console.log(name)
+    getTracks()
   };
-
-
-  /*
-  useEffect(() => {
-    axios.get(`http://localhost:8000/tracks/everettraps`).then((response) => {
-      setTracks(response.data);
-      console.log(tracks)
-    })
-
-  }, [])
-  */
 
   return (
     <div className="App">
@@ -52,6 +38,7 @@ function App() {
       </form>
 
       {accountName}
+      {console.log(tracks)}
 
 
     </div>

@@ -76,6 +76,7 @@ app.get('/tracks/:id', async (req, res) => {
 
     //get id
     const id = await getID(req.params.id)
+    console.log("id is: "+id)
 
     //create url
     var baseURL = 'https://api-v2.soundcloud.com/users/'
