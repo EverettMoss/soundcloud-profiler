@@ -101,7 +101,10 @@ app.get('/tracks/:accountName', async (req, res) => {
             const comments = currentPage[index].comment_count
             const artwork = currentPage[index].artwork_url
             const artist_name = currentPage[index].user.username
+            const artist_link = currentPage[index].user.permalink_url
             const song_link = currentPage[index].permalink_url
+            const likes = currentPage[index].likes_count
+            const reposts = currentPage[index].reposts_count
 
             //add track data to array
             tracks.push({
@@ -111,7 +114,10 @@ app.get('/tracks/:accountName', async (req, res) => {
                 comments: comments,
                 genre: genre,
                 artwork: artwork,
-                link: song_link
+                link: song_link,
+                likes: likes,
+                reposts: reposts,
+                artist_link: artist_link
             })
         }
 
