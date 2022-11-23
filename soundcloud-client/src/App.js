@@ -23,6 +23,7 @@ function App() {
 
   const clearTracks = () => {
     setTracks(null)
+    setOrder('ASC')
   };
 
   const getTotalStreams = () => {
@@ -35,32 +36,25 @@ function App() {
   };
 
   const sorting = (col) => {
-    const sorted = tracks.sort((a,b) => (a.plays > b.plays) ? -1 : 1)
-    setTracks(sorted)
-    console.log(tracks)
 
-    /*
-    if (order == 'ASC') {
-      const sorted = tracks.sort((a,b) => (a.plays > b.plays) ? -1 : 1)
-      setTracks(sorted)
-      console.log(order + ": " + sorted)
+    if (order === 'ASC') {
+      tracks.sort((a, b) => (a.plays > b.plays) ? -1 : 1)
       setOrder('DESC')
     }
+    
 
-    if (order == 'DESC') {
-      const sorted = tracks.sort((a,b) => (a.col < b.col) ? 1 : -1)
-      setTracks(sorted)
-      console.log(order + ": " + sorted)
+    if (order === 'DESC') {
+      tracks.sort((a, b) => (a.plays < b.plays) ? -1 : 1)
+      setOrder('DESC')
       setOrder('ASC')
     }
-    */
-    
+
   }
 
   useEffect(() => {
     console.log('changes in tracks')
 
-  }, [tracks])
+  }, [order])
 
   return (
     <>
@@ -74,8 +68,8 @@ function App() {
           </div>
 
           <div className='grid h-screen place-items-center'>
-            <div className='overflow-y-auto h-3/5'>
-              <div className="overflow-x-auto overflow-y-auto relative shadow-md sm:rounded-lg w-7/10">
+            <div className='overflow-y-auto h-3/5 w-4/5'>
+              <div className="overflow-x-auto overflow-y-auto relative shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-blue-100 dark:text-blue-100">
                   <thead className="text-xs text-white uppercase bg-indigo-600 dark:text-white">
                     <tr>
@@ -109,10 +103,10 @@ function App() {
                           <>
                             <tr className="bg-indigo-100 border-b border-indigo-400 text-indigo-500">
                               <th scope="row" className="py-4 px-6 font-medium text-indigo-500 whitespace-nowrap dark:text-indigo-500">
-                                <a href={track.link} target='_blank'>{track.title}</a>
+                                <a href={track.link} target='_blank' rel="noreferrer">{track.title}</a>
                               </th>
                               <td className="py-4 px-6">
-                                <a href={track.artist_link} target='_blank'>{track.artist}</a>
+                                <a href={track.artist_link} target='_blank' rel="noreferrer">{track.artist}</a>
                               </td>
                               <td className="py-4 px-6">
                                 {track.genre}
