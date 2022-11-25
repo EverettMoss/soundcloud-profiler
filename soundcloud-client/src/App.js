@@ -36,15 +36,14 @@ function App() {
   };
 
   const sorting = (col) => {
-
     if (order === 'ASC') {
-      tracks.sort((a, b) => (a.plays > b.plays) ? -1 : 1)
+      tracks.sort((a, b) => (a[col] > b[col]) ? -1 : 1)
       setOrder('DESC')
     }
-    
+
 
     if (order === 'DESC') {
-      tracks.sort((a, b) => (a.plays < b.plays) ? -1 : 1)
+      tracks.sort((a, b) => (a[col] < b[col]) ? -1 : 1)
       setOrder('DESC')
       setOrder('ASC')
     }
@@ -61,10 +60,15 @@ function App() {
 
       {tracks ?
         <>
-          <div className='absolute top-0 right-0 m-3'>
-            <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" onClick={clearTracks}>
-              refresh
-            </button>
+          <div className=' absolute top-0 right-0 m-3'>
+            <div className='flex items-center'>
+              <a href={tracks[0].artist_link} target='_blank' rel="noreferrer">
+                <img class="w-10 h-10 rounded-full mr-3" src={tracks[0].profile_picture} />
+              </a>
+              <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" onClick={clearTracks}>
+                refresh
+              </button>
+            </div>
           </div>
 
           <div className='grid h-screen place-items-center'>
@@ -82,13 +86,13 @@ function App() {
                       <th scope="col" className="py-3 px-6">
                         Genre
                       </th>
-                      <th scope="col" className="py-3 px-6">
+                      <th scope="col" className="py-3 px-6" onClick={() => sorting('likes')}>
                         Likes
                       </th>
-                      <th scope="col" className="py-3 px-6">
+                      <th scope="col" className="py-3 px-6" onClick={() => sorting('reposts')}>
                         Reposts
                       </th>
-                      <th scope="col" className="py-3 px-6">
+                      <th scope="col" className="py-3 px-6" onClick={() => sorting('comments')}>
                         Comments
                       </th>
                       <th scope="col" className="py-3 px-6" onClick={() => sorting('plays')}>
@@ -112,10 +116,10 @@ function App() {
                                 {track.genre}
                               </td>
                               <td className="py-4 px-6">
-                                {track.likes}
+                                {track.likes.toLocaleString()}
                               </td>
                               <td className="py-4 px-6">
-                                {track.reposts}
+                                {track.reposts.toLocaleString()}
                               </td>
                               <td className="py-4 px-6">
                                 {track.comments.toLocaleString()}
@@ -132,7 +136,7 @@ function App() {
                 </table>
               </div>
             </div>
-            <h2 className='text-lg text-indigo-500 font-semibold m-10'>{accountName} has {tracks.length} songs with {getTotalStreams(tracks).toLocaleString()} streams.</h2>
+            <h2 className='text-lg text-indigo-500 font-semibold m-10 lowercase'>{accountName} has {tracks.length} songs with {getTotalStreams(tracks).toLocaleString()} streams.</h2>
           </div>
         </>
         :

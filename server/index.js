@@ -102,6 +102,7 @@ app.get('/tracks/:accountName', async (req, res) => {
             const artwork = currentPage[index].artwork_url
             const artist_name = currentPage[index].user.username
             const artist_link = currentPage[index].user.permalink_url
+            const artist_picture = currentPage[index].user.avatar_url
             const song_link = currentPage[index].permalink_url
             const likes = currentPage[index].likes_count
             const reposts = currentPage[index].reposts_count
@@ -117,7 +118,8 @@ app.get('/tracks/:accountName', async (req, res) => {
                 link: song_link,
                 likes: likes,
                 reposts: reposts,
-                artist_link: artist_link
+                artist_link: artist_link,
+                profile_picture: artist_picture
             })
         }
 
