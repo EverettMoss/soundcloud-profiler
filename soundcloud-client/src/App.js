@@ -7,7 +7,7 @@ function App() {
   const [order, setOrder] = useState('ASC')
 
   const getTracks = async () => {
-    const response = await axios.get(`http://localhost:8000/tracks/${accountName}`)
+    const response = await axios.get(`https://soundcloud-profiler.onrender.com//tracks/${accountName}`)
     const data = response.data
     setTracks(data)
   }
@@ -77,25 +77,25 @@ function App() {
                 <table className="w-full text-sm text-left text-blue-100 dark:text-blue-100">
                   <thead className="text-xs text-white uppercase bg-indigo-600 dark:text-white">
                     <tr>
-                      <th scope="col" className="py-3 px-6">
+                      <th scope="col" className="w-2/12 py-3 px-6">
                         Song
                       </th>
-                      <th scope="col" className="py-3 px-6">
+                      <th scope="col" className="w-2/12 py-3 px-6">
                         Artist
                       </th>
-                      <th scope="col" className="py-3 px-6">
+                      <th scope="col" className="w-2/12 py-3 px-6">
                         Genre
                       </th>
-                      <th scope="col" className="py-3 px-6" onClick={() => sorting('likes')}>
+                      <th scope="col" className="w-2/12 py-3 px-6" onClick={() => sorting('likes')}>
                         Likes
                       </th>
-                      <th scope="col" className="py-3 px-6" onClick={() => sorting('reposts')}>
+                      <th scope="col" className="w-1/12 py-3 px-6" onClick={() => sorting('reposts')}>
                         Reposts
                       </th>
-                      <th scope="col" className="py-3 px-6" onClick={() => sorting('comments')}>
+                      <th scope="col" className="w-1/12 py-3 px-6" onClick={() => sorting('comments')}>
                         Comments
                       </th>
-                      <th scope="col" className="py-3 px-6" onClick={() => sorting('plays')}>
+                      <th scope="col" className="w-2/12 py-3 px-6" onClick={() => sorting('plays')}>
                         Plays
                       </th>
                     </tr>
