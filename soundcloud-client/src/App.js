@@ -7,7 +7,7 @@ function App() {
   const [order, setOrder] = useState('ASC')
 
   const getTracks = async () => {
-    const response = await axios.get(`https://soundcloud-profiler.onrender.com//tracks/${accountName}`)
+    const response = await axios.get(`https://soundcloud-profiler.onrender.com/tracks/${accountName}`)
     const data = response.data
     setTracks(data)
   }
@@ -51,7 +51,7 @@ function App() {
   }
 
   useEffect(() => {
-    console.log('changes in tracks')
+    //console.log('changes in tracks')
 
   }, [order])
 
