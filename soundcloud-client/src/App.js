@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
+import PulseLoader from "react-spinners/PulseLoader";
 
 function App() {
   const [accountName, setAccountName] = useState(null)
   const [tracks, setTracks] = useState(null)
+  const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState('ASC')
 
   const getTracks = async () => {
+    setLoading(true)
     const response = await axios.get(`https://soundcloud-profiler.onrender.com/tracks/${accountName}`)
+    setLoading(false)
     const data = response.data
     setTracks(data)
   }
@@ -150,6 +154,15 @@ function App() {
                   submit
                 </button>
               </form>
+              {loading && (
+                <>
+                  <PulseLoader
+                    color="#4338ca"
+                    speedMultiplier={0.75}
+                    size={10}
+                  />
+                </>
+              )}
             </div>
           </div>
         </>
