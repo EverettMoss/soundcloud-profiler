@@ -80,7 +80,7 @@ function App() {
                 <img class="w-10 h-10 rounded-full mr-3" src={tracks[0].profile_picture} />
               </a>
               <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" onClick={clearTracks}>
-                refresh
+                back
               </button>
             </div>
           </div>
