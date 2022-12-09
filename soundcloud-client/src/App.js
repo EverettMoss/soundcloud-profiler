@@ -1,6 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import axios from 'axios'
-import PulseLoader from "react-spinners/PulseLoader";
+import PulseLoader from "react-spinners/PulseLoader"
+import ReactGA from 'react-ga4'
+import { createBrowserHistory } from "history"
+
+ReactGA.initialize("G-BP4LTGF4K6");
+const history = createBrowserHistory();
+history.listen(location => {
+  ReactGA.set({ page: location.pathname });
+  ReactGA.send(location.pathname);
+});
+//ReactGA.send("pageview");
 
 function App() {
   const [accountName, setAccountName] = useState(null)
