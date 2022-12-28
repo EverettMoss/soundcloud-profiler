@@ -10,7 +10,7 @@ app.use(cors())
 
 //constants
 const params = {
-    'client_id': '8m4K5d2x4mNmUHLhLmsGq9vxE3dDkxCm',
+    'client_id': 'axONSn9wunfrHxx4sF5BJFXKNjHlQNVr',
     'limit': '20',
     'offset': '0',
     'linked_partitioning': '1',
@@ -81,6 +81,8 @@ app.get('/tracks/:accountName', async (req, res) => {
     var baseURL = 'https://api-v2.soundcloud.com/users/'
     const url = baseURL + `${id}/tracks`
 
+    
+
     //get tracks json
     var response = await axios.get(url, {
         params: params,
@@ -140,6 +142,7 @@ app.get('/tracks/:accountName', async (req, res) => {
     }
     res.json(tracks)
     console.log(tracks)
+    
 })
 
 const getID = async (accountName) => {
