@@ -10,7 +10,7 @@ app.use(cors())
 
 //constants
 const params = {
-    'client_id': 'axONSn9wunfrHxx4sF5BJFXKNjHlQNVr',
+    'client_id': 'AwJSFpPRsaHU9v4TbjcezVAZVRdlvDSF',
     'limit': '20',
     'offset': '0',
     'linked_partitioning': '1',
