@@ -20,7 +20,9 @@ function App() {
 
   const getTracks = async () => {
     setLoading(true)
-    const response = await axios.get(`https://soundcloud-profiler.onrender.com/tracks/${accountName}`)
+    console.log(accountName)
+    //const response = await axios.get(`https://soundcloud-profiler.onrender.com/tracks/${accountName}`)
+    const response = await axios.get(`http://localhost:8000/tracks/${accountName}`)
     setLoading(false)
     const data = response.data
     setTracks(data)
@@ -77,7 +79,7 @@ function App() {
           <div className=' absolute top-0 right-0 m-3'>
             <div className='flex items-center'>
               <a href={tracks[0].artist_link} target='_blank' rel="noreferrer">
-                <img class="w-10 h-10 rounded-full mr-3" src={tracks[0].profile_picture} />
+                <img alt='soundcloud profile' class="w-10 h-10 rounded-full mr-3" src={tracks[0].profile_picture} />
               </a>
               <button className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" onClick={clearTracks}>
                 back

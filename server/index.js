@@ -10,7 +10,7 @@ app.use(cors())
 
 //constants
 const params = {
-    'client_id': 'AwJSFpPRsaHU9v4TbjcezVAZVRdlvDSF',
+    'client_id': 'KvT9yU79HKNkQN1sBguLFCC4xNjWj2JJ',
     'limit': '20',
     'offset': '0',
     'linked_partitioning': '1',
@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 app.get('/likes', async (req, res) => {
     const response = await axios.get('https://api-v2.soundcloud.com/users/285572916/likes', {
         params: {
-            'client_id': '8m4K5d2x4mNmUHLhLmsGq9vxE3dDkxCm',
+            'client_id': 'KvT9yU79HKNkQN1sBguLFCC4xNjWj2JJ',
             'limit': '10',
             'offset': '0',
             'linked_partitioning': '1',
@@ -77,11 +77,13 @@ app.get('/tracks/:accountName', async (req, res) => {
     //get id
     const id = await getID(req.params.accountName)
 
+    console.log("Id is: " + id)
+
     //create url
     var baseURL = 'https://api-v2.soundcloud.com/users/'
     const url = baseURL + `${id}/tracks`
 
-    
+
 
     //get tracks json
     var response = await axios.get(url, {
@@ -108,6 +110,15 @@ app.get('/tracks/:accountName', async (req, res) => {
             const song_link = currentPage[index].permalink_url
             const likes = currentPage[index].likes_count
             const reposts = currentPage[index].reposts_count
+
+            // Define a regular expression to allow only alphanumeric characters, spaces, and basic punctuation
+            const validCharsRegex = /^[a-zA-Z0-9\s\-,.()'"!?]+$/;
+
+            // Check if track_title or artist_name contains invalid characters
+            if (!validCharsRegex.test(track_title) || !validCharsRegex.test(artist_name)) {
+                console.warn(`Skipping track due to invalid characters in title or artist name: ${track_title} by ${artist_name}`);
+                continue; // Skip this iteration and move to the next track
+            }
 
             //add track data to array
             tracks.push({
@@ -142,7 +153,7 @@ app.get('/tracks/:accountName', async (req, res) => {
     }
     res.json(tracks)
     console.log(tracks)
-    
+
 })
 
 const getID = async (accountName) => {
@@ -158,7 +169,8 @@ const getID = async (accountName) => {
             const trimmedStart = idJSON.substring(24) //trims before '='
             const accountObj = JSON.parse(trimmedStart.slice(0, -1)) //trims ';' & turns to object
 
-            id = accountObj[6].data.id //this is where id is located
+            console.log(accountObj)
+            id = accountObj[5].data.id //this is where id is located
         }
     })
     return id;
